@@ -24,7 +24,8 @@ def gen_event() -> Generator[tuple[str, str], None, None]:
         yield (player, action)
 
 
-def consume_event(events: list[tuple[str, str]]) -> Generator[tuple[str, str], None, None]:
+def consume_event(events: list[tuple[str, str]]
+                 ) -> Generator[tuple[str, str], None, None]:
     while events:
         index = random.randint(0, len(events) - 1)
         yield events.pop(index)
