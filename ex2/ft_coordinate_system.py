@@ -5,9 +5,6 @@ def get_player_pos() -> tuple[float, float, float]:
     while True:
         coords = input("Enter new coordinates as floats in format 'x,y,z': ")
         parts = coords.split(",")
-        if len(parts) != 3:
-            print("Invalid syntax")
-            continue
         try:
             x = float(parts[0])
         except ValueError as ex:

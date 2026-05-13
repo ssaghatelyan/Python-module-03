@@ -23,7 +23,7 @@ def main() -> None:
         else:
             total_players = len(scores)
             total_score = sum(scores)
-            average_score = float(total_score / total_players)
+            average_score = total_score / total_players
             high_score = max(scores)
             low_score = min(scores)
             score_range = high_score - low_score
