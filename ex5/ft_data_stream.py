@@ -4,8 +4,8 @@ import random
 players = ["alice",
            "Bob",
            "dylan",
-           "charlie"
-          ]
+           "charlie"]
+
 actions = ["run",
            "eat",
            "sleep",
@@ -14,8 +14,7 @@ actions = ["run",
            "move",
            "swim",
            "release",
-           "use"
-           ]
+           "use"]
 
 
 def gen_event() -> Generator[tuple[str, str], None, None]:
@@ -25,29 +24,34 @@ def gen_event() -> Generator[tuple[str, str], None, None]:
         yield (player, action)
 
 
-def consume_event(events: list)-> Generator[tuple[str, str], None, None]:
+def consume_event(events: list[tuple[str, str]]) -> Generator[tuple[str, str], None, None]:
     while events:
         index = random.randint(0, len(events) - 1)
         yield events.pop(index)
 
 
-gen = gen_event()
+def main() -> None:
+    gen = gen_event()
 
-print("=== Game Data Stream Processor ===")
+    print("=== Game Data Stream Processor ===")
 
-for i in range(1000):
-    tup: tuple[str, str] = next(gen)
-    print(f"Event {i}: Player {tup[0]} did action {tup[1]}")
+    for i in range(1000):
+        tup: tuple[str, str] = next(gen)
+        print(f"Event {i}: Player {tup[0]} did action {tup[1]}")
 
-events = []
+    events = []
 
-for i in range(10):
-    events.append(next(gen))
+    for i in range(10):
+        events.append(next(gen))
 
-print(f"Built list of 10 events: {events}")
+    print(f"Built list of 10 events: {events}")
 
-consume = consume_event(events)
+    consume = consume_event(events)
 
-for event in consume_event(events):
-    print(f"Got event from list: {event}")
-    print(f"Remains in list: {events}")
+    for event in consume:
+        print(f"Got event from list: {event}")
+        print(f"Remains in list: {events}")
+
+
+if __name__ == "__main__":
+    main()
